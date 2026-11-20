@@ -24,10 +24,9 @@ export async function apiFetch<T>(
   });
 
   const json = await res.json().catch(() => null);
-
-  if (!res.ok || !json?.success) {
-    throw new Error(json?.message || `Request failed (${res.status})`);
-  }
+if (!res.ok) {
+  throw new Error(json?.message || `Request failed (${res.status})`);
+}
 
   return json as ApiResponse<T>;
 }
